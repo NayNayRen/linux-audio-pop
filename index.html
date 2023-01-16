@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- USES NEWEST VERSION OF FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/tux.png" />
+    <title>Fixing Mint's Audio Pop</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="heading">How To Fix Linux Mint's Audio Popping</h1>
+      <span>A quick audio fix written up by Nate Moscato.</span>
+    </header>
+    <main>
+      <div class="intro">
+        <p>
+          There have been a few times after installing Ubuntu or Linux Mint that
+          when trying to listen to or watch anything with audio, a rather loud
+          crackle/pop would happen. This pop would only happen after initially
+          starting something with sound, or turning up/down the volume.
+        </p>
+        <p>
+          This popping is from the audio sound server called Pulse Audio. It is
+          an integral part for all modern day Linux distros, along with some
+          mobile devices too. It tells your audio to go to sleep after 10
+          seconds of no use. So when audio is started or adjusted, it pops just
+          to let you know it's now awake.
+        </p>
+        <p>
+          It's kind of a good thing, as it lets you know Pulse Audio is working,
+          but it's also quite annoying, and somewhat startling. To fix this
+          audio hiccup is quite simple. We are going to navigate to the Pulse
+          directory, use Nano (a default terminal editor in most Linux distros)
+          to comment out the line that tells Pulse to sleep, save this change,
+          and restart Pulse Audio.
+        </p>
+      </div>
+      <div class="actions">
+        <h2>Let's Begin...</h2>
+        <p>Open a terminal and navigate to Pulse Audio's directory:</p>
+        <div class="terminal-text">
+          <span class="terminal-command-one">cd /etc/pulse</span
+          ><button
+            id="terminal-command-one"
+            class="copy-button"
+            aria-label="Copy terminal command."
+            title="Copy"
+          >
+            <i class="fa fa-clipboard" aria-hidden="false"></i>
+          </button>
+          <span class="terminal-text-copied terminal-command-one-copied"
+            >Copied</span
+          >
+        </div>
+        <p>
+          While in Pulse's directory, use Nano to open and edit the file
+          default.pa:
+        </p>
+        <div class="terminal-text">
+          <span class="terminal-command-two">sudo nano default.pa</span
+          ><button
+            id="terminal-command-two"
+            class="copy-button"
+            aria-label="Copy terminal command."
+            title="Copy"
+          >
+            <i class="fa fa-clipboard" aria-hidden="false"></i>
+          </button>
+          <span class="terminal-text-copied terminal-command-two-copied"
+            >Copied</span
+          >
+        </div>
+        <p>
+          With default.pa open in terminal, look for the line that says
+          'load-module module-suspend-on-idle' and add a '#' in front of it to
+          comment it out like so:
+        </p>
+        <span class="terminal-text">#load-module module-suspend-on-idle</span>
+        <p>
+          Now save using Ctrl+X, press Y to confirm the edit, and Enter to save
+          the file name.
+        </p>
+        <p>
+          With the terminal still open, type cd and press Enter. This will bring
+          you back to your Home directory.
+        </p>
+        <p>Finally, with the terminal still open, restart Pulse Audio:</p>
+        <div class="terminal-text">
+          <span class="terminal-command-three">pulseaudio -k</span
+          ><button
+            id="terminal-command-three"
+            class="copy-button"
+            aria-label="Copy terminal command."
+            title="Copy"
+          >
+            <i class="fa fa-clipboard" aria-hidden="false"></i></button
+          ><span class="terminal-text-copied terminal-command-three-copied"
+            >Copied</span
+          >
+        </div>
+      </div>
+      <div class="closing">
+        <p>
+          You should now be pop and crackle free when starting or adjusting the
+          volume of your audio. I hope this helped someone from having the same
+          audio issue.
+        </p>
+      </div>
+    </main>
+    <footer class="footer">&copy; NM January 2023</footer>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+      integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        // clean and copy text to clipboard
+        function trimAndCopyText(text, container) {
+          let trimmedText = text.trim();
+          navigator.clipboard.writeText(trimmedText);
+          container.addClass("show-copied-message");
+          setTimeout(() => {
+            container.removeClass("show-copied-message");
+          }, 3000);
+          return trimmedText;
+        }
+        $(document).on("click", "#terminal-command-one", () => {
+          trimAndCopyText(
+            $(".terminal-command-one").text(),
+            $(".terminal-command-one-copied")
+          );
+        });
+        $(document).on("click", "#terminal-command-two", () => {
+          trimAndCopyText(
+            $(".terminal-command-two").text(),
+            $(".terminal-command-two-copied")
+          );
+        });
+        $(document).on("click", "#terminal-command-three", () => {
+          trimAndCopyText(
+            $(".terminal-command-three").text(),
+            $(".terminal-command-three-copied")
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
