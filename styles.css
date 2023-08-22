@@ -1,12 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono&display=swap");
-
-* {
-  box-sizing: border-box;
-}
-
 .actions {
-  margin: 0 auto;
-  width: 90%;
+  width: 75%;
   /* outline: solid 1px blue; */
 }
 
@@ -15,17 +8,8 @@
   margin-bottom: 5px;
 }
 
-body {
-  height: 100vh;
-  margin: 0;
-  overflow-x: hidden;
-  padding: 0;
-  width: 100%;
-}
-
 .closing {
-  margin: 0 auto;
-  width: 90%;
+  width: 75%;
   /* outline: solid 1px blue; */
 }
 
@@ -34,6 +18,7 @@ body {
 }
 
 .copy-button {
+  -webkit-transition: color 150ms ease;
   background: none;
   border: none;
   color: #696969;
@@ -52,8 +37,18 @@ footer {
   background-color: #7fffd4;
   font-family: "Poppins", sans-serif;
   font-style: italic;
-  padding: 20px 10px;
+  padding: 10px;
   text-align: center;
+}
+
+.footer-logo {
+  margin: 0 auto;
+  width: 50px;
+}
+
+.footer-logo img {
+  height: auto;
+  width: 100%;
 }
 
 header {
@@ -72,43 +67,61 @@ header span {
   font-style: italic;
 }
 
-html {
-  height: 100%;
-  width: 100%;
-}
-
 .intro {
-  margin: 0 auto;
-  width: 90%;
+  margin-bottom: 20px;
+  width: 75%;
   /* outline: solid 1px blue; */
 }
 
 .intro p {
   font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.intro p:last-of-type {
+  margin-bottom: 0;
 }
 
 main {
-  /* border: solid 1px blue; */
+  -ms-flex-direction: column;
+  -ms-flex-pack: space-evenly;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: space-evenly;
+  display: -ms-flexbox;
+  display: -webkit-box;
   display: flex;
   flex-direction: column;
   font-family: "Poppins", sans-serif;
   justify-content: space-evenly;
   min-height: 100%;
+  padding: 40px 50px
+    /* outline: solid 1px blue; */
 }
 
 .terminal-text {
+  -ms-flex-align: center;
+  -ms-flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
   align-items: center;
   background-color: #dcdcdc;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-box;
   display: inline-flex;
   flex-direction: row;
   font-family: "Roboto Mono", monospace;
   font-size: 16px;
   height: 40px;
+  margin-bottom: 25px;
   padding: 0 15px;
   position: relative;
 }
 
 .terminal-text-copied {
+  -webkit-transform: translateY(-50%);
+  -webkit-transition: left 250ms ease;
   background-color: #7fffd4;
   color: #000;
   font-family: "Poppins", sans-serif;
@@ -129,11 +142,35 @@ main {
   left: 100%;
 }
 
+@media (max-width: 1000px) {
+
+  .actions {
+    width: 85%;
+  }
+
+  .closing {
+    width: 85%;
+  }
+
+  .intro {
+    width: 85%;
+  }
+}
+
 @media (max-width: 700px) {
+
   .actions p,
   .closing p,
   .intro p {
     font-size: 16px;
+  }
+
+  .actions {
+    width: 95%;
+  }
+
+  .closing {
+    width: 95%;
   }
 
   header h1 {
@@ -141,7 +178,15 @@ main {
   }
 
   header span {
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  .intro {
+    width: 95%;
+  }
+
+  main {
+    padding: 40px 10px 40px 20px
   }
 
   .terminal-text {
